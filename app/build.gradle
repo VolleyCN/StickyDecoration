@@ -22,10 +22,12 @@ android {
 dependencies {
     implementation project(':stickyDecoration')
     implementation project(':apmTools')
-    implementation rootProject.ext.dependencies['appcompat-v7']
-    implementation rootProject.ext.dependencies['recyclerview-v7']
-    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.47'
+    implementation rootProject.ext.dependencies['appcompat']
+    implementation rootProject.ext.dependencies['material']
+    implementation rootProject.ext.dependencies['constraintlayout']
+    implementation 'com.scwang.smart:refresh-layout-kernel:2.0.1'
+    implementation 'com.scwang.smart:refresh-header-classics:2.0.1'    //经典刷新头
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6'
 
 }
 

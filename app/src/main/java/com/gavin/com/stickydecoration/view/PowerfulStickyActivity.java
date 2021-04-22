@@ -2,25 +2,24 @@ package com.gavin.com.stickydecoration.view;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.gavin.com.library.PowerfulStickyDecoration;
-import com.gavin.com.library.StickyDecoration;
 import com.gavin.com.library.listener.OnGroupClickListener;
 import com.gavin.com.library.listener.PowerGroupListener;
 import com.gavin.com.stickydecoration.R;
@@ -99,13 +98,11 @@ public class PowerfulStickyActivity extends AppCompatActivity {
         //下面是平时的RecyclerView操作
 
         mAdapter = new QuickAdapter();
-        ((QuickAdapter) mAdapter).setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        ((QuickAdapter) mAdapter).setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 City city = dataList.get(position);
-                Toast.makeText(PowerfulStickyActivity.this,
-                        "item click " + position + " : " + city.getProvince() + " - " + city.getName(),
-                        1000).show();
+                Toast.makeText(PowerfulStickyActivity.this, "item click " + position + " : " + city.getProvince() + " - " + city.getName(), 1000).show();
             }
         });
 

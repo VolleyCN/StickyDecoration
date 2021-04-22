@@ -2,10 +2,6 @@ package com.gavin.com.stickydecoration.view;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +9,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.gavin.com.library.StickyDecoration;
 import com.gavin.com.library.listener.GroupListener;
 import com.gavin.com.library.listener.OnGroupClickListener;
@@ -86,22 +89,20 @@ public class StickyActivity extends AppCompatActivity {
                     @Override
                     public void onClick(int position, int id) {
                         //点击事件，返回当前分组下的第一个item的position
-                        String content = "onGroupClick --> " + position + " " +  dataList.get(position).getProvince();
+                        String content = "onGroupClick --> " + position + " " + dataList.get(position).getProvince();
                         Toast.makeText(StickyActivity.this, content, Toast.LENGTH_SHORT).show();
                     }
                 });
-                //.setSticky(false)
+        //.setSticky(false)
         //------------- StickyDecoration 使用部分  ----------------
         //下面是平时的RecyclerView操作
 
         mAdapter = new QuickAdapter();
-        ((QuickAdapter) mAdapter).setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        ((QuickAdapter) mAdapter).setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 City city = dataList.get(position);
-                Toast.makeText(StickyActivity.this,
-                        "item click " + position + " : " + city.getProvince() + " - " + city.getName(),
-                        1000).show();
+                Toast.makeText(StickyActivity.this, "item click " + position + " : " + city.getProvince() + " - " + city.getName(), Toast.LENGTH_SHORT).show();
             }
         });
 
